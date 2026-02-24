@@ -17,10 +17,24 @@ def home():
 
 # 3. OB-HAVO FUNKSIYASI
 def get_weather(city):
-    url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric&lang=uz"
-    response = requests.get(url).json()
-    if response.get("cod") != 200:
-        return "Shahar topilmadi. Iltimos, nomini to'g'ri yozing (masalan: Tashkent)."
+   response = requests.get(url)
+        data = response.json()
+        
+        # Agar shahar topilsa (kod 200 bo'lsa)
+        if data.get("cod") == 200:
+            temp = data["main"]["temp"]
+            desc = data["weather"][0]["description"]
+            humidity = data["main"]["humidity"]
+            wind = data["wind"]["speed"]
+            
+            answer = (f"🌤 {city.capitalize()} shahridagi ob-havo:\n\n"
+                      f"🌡 Harorat: {temp}°C\n"
+                      f"☁️ Holat: {desc}\n"
+                      f"💧 Namlik: {humidity}%\n"
+                      f"💨 Shamol: {wind} m/s")
+            bot.reply_to(message, answer)
+        else:
+            bot.reply_to(message, "❌ Shahar topilmadi. Iltimos, nomini inglizcha yozib ko'ring (masalan: Tashkent).")
     
     temp = response["main"]["temp"]
     desc = response["weather"][0]["description"]
