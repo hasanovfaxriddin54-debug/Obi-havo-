@@ -16,6 +16,7 @@ def home():
 
 # 2. OB-HAVO FUNKSIYASI
 def get_weather(city):
+    # Bu yerda &units=metric haroratni Selsiyda ko'rsatadi
     url = f"http://api.openweathermap.org/data/2.5/weather?q={city}&appid={WEATHER_API_KEY}&units=metric&lang=uz"
     try:
         response = requests.get(url).json()
@@ -26,12 +27,12 @@ def get_weather(city):
         else:
             return "❌ Shahar topilmadi. Iltimos, nomini inglizcha yozing (masalan: Tashkent)."
     except:
-        return "⚠️ Xatolik yuz berdi."
+        return "⚠️ Ma'lumot olishda xatolik yuz berdi."
 
-# 3. TELEGRAM XABARLARINI QABUL QILISH
+# 3. TELEGRAM XABARLARI
 @bot.message_handler(commands=['start'])
 def start(message):
-    bot.reply_to(message, "Salom! Ob-havoni bilish uchun shahar nomini yozing.")
+    bot.reply_to(message, "Salom! Ob-havoni bilish uchun shahar nomini yozing (masalan: Toshkent).")
 
 @bot.message_handler(func=lambda m: True)
 def echo_all(message):
