@@ -5,7 +5,7 @@ from telebot import TeleBot
 from threading import Thread
 
 # 1. SOZLAMALAR
-BOT_TOKEN = "8214592685:AAHSk7369j8Pf4QlP4VTO fzrJC7Yqv-RfaQ"
+BOT_TOKEN = "8214592685:AAHSk7369j8Pf4QlP4VTOfzrJC7Yqv-RfaQ"
 WEATHER_API_KEY = "80998394e1011867c4e4eb789c656910"
 bot = TeleBot(BOT_TOKEN)
 app = Flask(__name__)
